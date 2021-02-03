@@ -35,20 +35,20 @@ Rcpp::List simp_lin_cpp(arma::vec x, arma::vec y) {
   double b0_se = sqrt(MSE*(1/n + (mu_x*mu_x)/denom));
   
   double cv = R::qt(0.025, n - 2, FALSE, FALSE); // critical value
-  arma::vec b0_ci = {b0 - cv*b0_se, b0 + cv*b0_se};
-  arma::vec b1_ci = {b1 - cv*b1_se, b1 + cv*b1_se};
+  arma::rowvec b0_ci = {b0 - cv*b0_se, b0 + cv*b0_se};
+  arma::rowvec b1_ci = {b1 - cv*b1_se, b1 + cv*b1_se};
   
   //Make vectors to return as a list
   arma::vec coefficients = {b0, b1};
   arma::vec se = {b0_se, b1_se};
   
   // Return a list
-  return List::create(Rcpp::Named("Coefficients") = coefficients,
-                      Rcpp::Named("StandardError") = se,
-                      Rcpp::Named("b0_95CI") = b0_ci,
-                      Rcpp::Named("b1_95CI") = b1_ci,
-                      Rcpp::Named("Residuals") = residuals,
-                      Rcpp::Named("Predicted") = predicted);
+  return List::create(Named("Coefficients") = coefficients,
+                      Named("StandardError") = se,
+                      Named("b0_95CI") = b0_ci,
+                      Named("b1_95CI") = b1_ci,
+                      Named("Residuals") = residuals,
+                      Named("Predicted") = predicted);
   
 }
 
