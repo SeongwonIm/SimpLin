@@ -1,0 +1,15 @@
+Package: SimpLin
+Type: Package
+Title: Simple Linear Regression
+Version: 1.0
+Date: 2021-02-03
+Author: Seongwon Im
+Maintainer: Seongwon Im <rseongwoni1@gmail.com>
+Description: The package runs a simple linear regression analysis. The output includes the estimated coefficients, standard errors, 95% confidence interval for the intercept and slope. The result also includes the predicted values and the residuals.
+License: GPL (>= 2)
+Imports: Rcpp (>= 1.0.6)
+LinkingTo: Rcpp, RcppArmadillo
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

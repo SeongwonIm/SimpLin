@@ -1,0 +1,58 @@
+---
+title: "SimpLin: Simple linear regression"
+author: Seongwon Im, CSU
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{SLR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+$\texttt{SimpLin}$ package performs a simple linear regression faster than the original $\texttt{lm()}$ function in R. The package contains a function, $\texttt{simp_lin_R()}$, which takes two numeric vectors which represent the predictor, $X$ and the response variable, $Y$. 
+
+$$y_i = \beta_0 + \beta_1 x_i + \epsilon_i$$
+```{r setup}
+library(SimpLin)
+```
+
+Here, we take 20 data points which are standard normally distributed as an example for a fit.
+```{r}
+# Get a randomized exemplary data
+x = rnorm(n = 20, mean = 0, sd = 1)
+y = rnorm(n = 20, mean = 0, sd = 1)
+```
+
+The $\texttt{simp_lin_R()}$ function returns several fundamental values for the linear regression. These values include the estimated $\beta_0$ and $\beta_1$, their standard errors, 95% confidence intervals, predicted values and the residuals.
+```{r}
+# Fit the model with the simp_lin_R function
+fit = simp_lin_R(x, y)
+
+# Estimated coefficients
+fit$Coefficients
+
+# Standard Errors
+fit$StandardError
+
+# 95% confidence intervals for both b0 and b1
+fit$b0_95CI
+fit$b1_95CI
+```
+
+The function also returns the predicted(Fitted) values and the residuals calculated as shown below.
+$$i\text{th predicted value: }\hat{y_i} = \hat{\beta_0} + \hat{\beta_1}x_i$$
+$$i\text{th residual: } y - \hat{y_i}$$
+```{r}
+# Predicted(Fitted)
+fit$Predicted
+
+# Residuals
+fit$Residuals
+```
+
